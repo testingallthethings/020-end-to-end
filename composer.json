@@ -1,0 +1,26 @@
+{
+  "name": "braddle/end-to-end-testing",
+  "description": "Demonstrting End to End Testing a simple REST API",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mark Bradley",
+      "email": "braddle@gmail.com"
+    }
+  ],
+  "autoload": {
+    "Braddle\\": "src"
+  },
+  "autoload-dev": {
+    "Braddle\\": ["test/e2e", "test/unit"]
+  },
+  "require": {
+    "slim/slim": "4.4.0",
+    "slim/psr7": "1.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "9.0.2",
+    "guzzlehttp/guzzle": "7.0.0-beta.1"
+  }
+}
