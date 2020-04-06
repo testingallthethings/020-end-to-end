@@ -1,3 +1,3 @@
 <?php
 
-echo "HELLO, WORLD!";
+require_once __DIR__ . "../../app/app.php";
