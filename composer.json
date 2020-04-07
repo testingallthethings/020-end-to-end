@@ -10,10 +10,17 @@
     }
   ],
   "autoload": {
-    "Braddle\\": "src"
+    "psr-4": {
+      "Braddle\\": "src"
+    }
   },
   "autoload-dev": {
-    "Braddle\\": ["test/e2e", "test/unit"]
+    "psr-4": {
+      "Braddle\\": [
+        "test/e2e",
+        "test/unit"
+      ]
+    }
   },
   "require": {
     "slim/slim": "4.4.0",
