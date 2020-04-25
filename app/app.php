@@ -5,6 +5,7 @@ use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 
 require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/database.php";
 
 $app = AppFactory::create();
 

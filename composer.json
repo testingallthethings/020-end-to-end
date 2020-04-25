@@ -1,6 +1,6 @@
 {
   "name": "braddle/end-to-end-testing",
-  "description": "Demonstrting End to End Testing a simple REST API",
+  "description": "Demonstrating End to End Testing and integration testing of a simple REST API",
   "minimum-stability": "dev",
   "license": "MIT",
   "authors": [
@@ -18,13 +18,16 @@
     "psr-4": {
       "Braddle\\": [
         "test/e2e",
-        "test/unit"
+        "test/unit",
+        "test/integration"
       ]
     }
   },
   "require": {
     "slim/slim": "4.4.0",
-    "slim/psr7": "1.0.0"
+    "slim/psr7": "1.0.0",
+    "doctrine/orm": "2.7.2",
+    "symfony/yaml": "2.*"
   },
   "require-dev": {
     "phpunit/phpunit": "9.0.2",

@@ -7,3 +7,13 @@ services:
     image: api_test
     ports:
       - "80:80"
+    depends_on:
+      - db
+#    command: ["./wait-for-db.sh", "db", "./etc/entrypoint.sh"]
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: tester
+      POSTGRES_PASSWORD: testing

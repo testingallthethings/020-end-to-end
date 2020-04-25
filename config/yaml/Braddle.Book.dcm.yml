@@ -1,0 +1,17 @@
+Braddle\Book:
+  type: entity
+  table: book
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    isbn:
+      type: string
+    title:
+      type: string
+    author:
+      type: string
+    numberOfPages:
+      type: integer
