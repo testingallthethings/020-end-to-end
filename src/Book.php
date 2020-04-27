@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Braddle;
 
-class Book
+class Book implements \JsonSerializable
 {
     private int $id;
     private string $isbn;
@@ -17,5 +17,15 @@ class Book
         $this->title = $title;
         $this->author = $author;
         $this->numberOfPages = $numberOfPages;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "isbn" => $this->isbn,
+            "title" => $this->title,
+            "author" => $this->author,
+            "number_of_pages" => $this->numberOfPages,
+        ];
     }
 }
