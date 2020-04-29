@@ -1,7 +1,9 @@
 <?php
 
+use Braddle\BookNotFoundException;
 use Braddle\BookRepository;
 use DI\Container;
+use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
@@ -36,7 +38,11 @@ $app->get("/health", function (Request $req, Response $resp){
 
 $app->get("/book/{isbn}", function (Request $req, Response $resp, $args){
     $bookRepo = $this->get("book-repo");
-    $book = $bookRepo->getByISBN($args["isbn"]);
+    try {
+        $book = $bookRepo->getByISBN($args["isbn"]);
+    } catch (BookNotFoundException $e) {
+        throw new HttpNotFoundException($req, "No Book Found", $e);
+    }
 
     $json = json_encode($book);
 

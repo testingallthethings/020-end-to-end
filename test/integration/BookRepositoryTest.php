@@ -42,4 +42,14 @@ class BookRepositoryTest extends TestCase
 
         $this->assertEquals($expectedBook, $actualBook);
     }
+
+    public function testGetByISBNThatDoesNotExist()
+    {
+        $this->expectException(BookNotFoundException::class);
+
+        $bookRepo = new BookRepository($this->entityManager);
+        $bookRepo->getByISBN("444444444");
+    }
+
+
 }

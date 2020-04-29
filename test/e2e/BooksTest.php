@@ -5,6 +5,7 @@ namespace Braddle;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use PHPUnit\Framework\TestCase;
 
 class BooksTest extends TestCase
@@ -59,6 +60,34 @@ class BooksTest extends TestCase
         $actualJson = json_decode($response->getBody()->getContents(), true);
 
         $this->assertEquals($expectedJson, $actualJson);
+    }
+
+    public function testGetByISBNThatDoesNotExist()
+    {
+        $client = new Client(["base_uri" => "http://api"]);
+
+        try {
+            $client->get(
+                "/book/555555555",
+                [
+                    "headers" => [
+                        "Accept" => "application/json"
+                    ]
+                ]
+            );
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+        }
+
+        $this->assertEquals(404, $response->getStatusCode());
+
+        $expectedBody = [
+            "status" => 404,
+            "title" => "Not Found",
+        ];
+        $actualBody = json_decode($response->getBody()->getContents(), true);
+
+        $this->assertEquals($expectedBody, $actualBody);
     }
 
 

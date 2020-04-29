@@ -19,6 +19,12 @@ class BookRepository
     {
         $repo = $this->entityManager->getRepository(Book::class);
 
-        return $repo->findOneBy(["isbn" => $isbn]);
+        $book = $repo->findOneBy(["isbn" => $isbn]);
+
+        if ($book instanceof Book) {
+            return $book;
+        }
+
+        throw new BookNotFoundException("No book for ISBN: " . $isbn);
     }
 }
