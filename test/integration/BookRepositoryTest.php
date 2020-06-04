@@ -51,5 +51,25 @@ class BookRepositoryTest extends TestCase
         $bookRepo->getByISBN("444444444");
     }
 
+    public function testHandlingDBHasGoneAway()
+    {
+        $isDevMode = true;
+        $config = Setup::createYAMLMetadataConfiguration([__DIR__ . "/../../config/yaml"], $isDevMode);
+
+        $conn = array(
+            "driver" => "pdo_pgsql",
+            "user" => "hacker",
+            "password" => "nottesting",
+            "host" => "db",
+        );
+
+        $entityManager = EntityManager::create($conn, $config);
+
+        $this->expectException(BookRepositoryException::class);
+
+        $bookRepo = new BookRepository($entityManager);
+        $bookRepo->getByISBN("444444444");
+    }
+
 
 }

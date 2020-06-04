@@ -1,8 +1,10 @@
 <?php
 
+use Braddle\BookByISBNController;
 use Braddle\BookNotFoundException;
 use Braddle\BookRepository;
 use DI\Container;
+use Psr\Container\ContainerInterface;
 use Slim\Exception\HttpNotFoundException;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Request;
@@ -15,6 +17,14 @@ $container = new Container();
 
 AppFactory::setContainer($container);
 $app = AppFactory::create();
+
+$container->set(BookByISBNController::class, function (ContainerInterface $c){
+   return new BookByISBNController($c->get("book-manager"));
+});
+
+$container->set("book-manager", function (ContainerInterface $c){
+   return new \Braddle\BookManager($c->get("book-repo"));
+});
 
 $container->set("book-repo", function () use ($entityManager) {
    return new BookRepository($entityManager);
@@ -36,19 +46,6 @@ $app->get("/health", function (Request $req, Response $resp){
     return $resp;
 });
 
-$app->get("/book/{isbn}", function (Request $req, Response $resp, $args){
-    $bookRepo = $this->get("book-repo");
-    try {
-        $book = $bookRepo->getByISBN($args["isbn"]);
-    } catch (BookNotFoundException $e) {
-        throw new HttpNotFoundException($req, "No Book Found", $e);
-    }
-
-    $json = json_encode($book);
-
-    $resp->getBody()->write($json);
-
-    return $resp;
-});
+$app->get("/book/{isbn}", BookByISBNController::class);
 
 $app->run();

@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":316:{a:2:{s:7:"defects";a:2:{s:56:"Braddle\BookByISBNControllerTest::testBookRetrievalError";i:3;s:52:"Braddle\BookManagerTest::testHandlingRepositoryError";i:3;}s:5:"times";a:2:{s:56:"Braddle\BookByISBNControllerTest::testBookRetrievalError";d:0.017;s:52:"Braddle\BookManagerTest::testHandlingRepositoryError";d:0.009;}}}

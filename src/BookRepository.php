@@ -3,6 +3,7 @@
 
 namespace Braddle;
 
+use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManager;
 
 class BookRepository
@@ -17,9 +18,12 @@ class BookRepository
 
     public function getByISBN(string $isbn) : Book
     {
-        $repo = $this->entityManager->getRepository(Book::class);
-
-        $book = $repo->findOneBy(["isbn" => $isbn]);
+        try {
+            $repo = $this->entityManager->getRepository(Book::class);
+            $book = $repo->findOneBy(["isbn" => $isbn]);
+        } catch (DBALException $e) {
+            throw new BookRepositoryException("Repository Broken", 0, $e);
+        }
 
         if ($book instanceof Book) {
             return $book;
