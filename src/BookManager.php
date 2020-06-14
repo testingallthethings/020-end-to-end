@@ -6,9 +6,9 @@ namespace Braddle;
 
 class BookManager implements ISBNBookRetriever
 {
-    private BookRepository $repo;
+    private ISBNBookRepository $repo;
 
-    public function __construct(BookRepository $repo)
+    public function __construct(ISBNBookRepository $repo)
     {
         $this->repo = $repo;
     }

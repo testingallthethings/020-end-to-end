@@ -6,7 +6,7 @@ namespace Braddle;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManager;
 
-class BookRepository
+class BookRepository implements ISBNBookRepository
 {
 
     private EntityManager $entityManager;
