@@ -25,7 +25,7 @@
   },
   "require": {
     "slim/slim": "4.4.0",
-    "slim/psr7": "1.0.0",
+    "slim/psr7": "1.6.1",
     "doctrine/orm": "2.7.2",
     "symfony/yaml": "2.*",
     "php-di/php-di": "dev-master"
